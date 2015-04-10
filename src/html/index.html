@@ -20,7 +20,7 @@
     <!-- inject:js -->
     <script src="js/app.min.js"></script>
   </head>
-  <body ng-app="BKNotification">
+  <body ng-app="BKNotification" ng-controller="TemplateController">
 
     <!-- Sidebars -->
     <div ng-include="'sidebar.html'" 
@@ -35,12 +35,12 @@
         <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
           BK Notification
         </div>
-        <div class="btn-group pull-left">
+        <div class="btn-group pull-left" ng-show="isSignedIn()">
           <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
             <i class="fa fa-bars"></i> Menu
           </div>
         </div>
-        <div class="btn-group pull-right hidden" ui-yield-to="navbarAction">
+        <div class="btn-group pull-right hidden" ui-yield-to="navbarAction" ng-show="isSignedIn()">
           <div ui-toggle="uiSidebarRight" class="btn">
             <i class="fa fa-comment"></i> Chat
           </div>

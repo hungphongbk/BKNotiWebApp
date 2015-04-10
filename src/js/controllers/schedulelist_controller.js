@@ -4,10 +4,11 @@ app.controller('ScheduleListController', ['$scope','BKNotiApi',function($scope,B
     $scope.studentInfo=BKNotiApi.Student.get();
     $scope.schedule={};
 
-    (function(){
-        BKNotiApi.Schedule.get().then(function(rs){
-            console.log(rs);
-            $scope.schedule=rs;
+    $scope.init=function () {
+        BKNotiApi.Schedule.get().then(function (rs) {
+            $scope.schedule = rs;
+        }, function (err) {
+            console.log(err);
         });
-    })();
+    };
 }]);

@@ -4,7 +4,7 @@
 var app=angular.module('BKNotification.controllers.Main');
 
 app.factory('BKNotiApi',['$http','$q',function($http,$q){
-    var DATA=(function(){
+    var DATA=(function(testmode){
         function def(){
             this.currentStu='';
             this.currentStuName='';
@@ -27,25 +27,39 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
                 StudentName:this.currentStuName
             };
         };
+        def.prototype.isSignedIn=function(){
+            return (typeof this.currentStu !== 'undefined');
+        };
 
         def.prototype.getSchedule=function(){
+            console.log(this);
+            var url=(testmode)?'test/tkb.json':'http://hungphongbk.ddns.net:3000/bk/list/tkb?stu='+this.currentStu;
             return $q(function(resolve,reject){
-                $http.get('test/tkb.json').success(function(rs){
+                $http.get(url).success(function(rs){
                     resolve(rs);
+                }).error(function(rs,code){
+                    reject(rs);
                 });
             });
         };
         return def;
-    })();
+    })(false);
     var data=new DATA();
 
-    return {
+    var obj = {
         Student: {
             set: data.setStudentId,
-            get: data.getStudentId
+            get: data.getStudentId,
+            isSignedIn: data.isSignedIn
         },
         Schedule: {
             get: data.getSchedule
         }
     };
+    (function binds(o){
+        for(var i in o)
+            if (typeof o[i]==='function') o[i]=o[i].bind(data);
+            else binds(o[i]);
+    })(obj);
+    return obj;
 }]);
