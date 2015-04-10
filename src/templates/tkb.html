@@ -1,0 +1,9 @@
+<section class="section container-fluid">
+    <h1>{{studentInfo.StudentId}}</h1>
+    <h4>{{studentInfo.StudentName}}</h4>
+    <ul>
+        <li ng-repeat="stu in schedule.Items">
+            {{stu.key.Name}}
+        </li>
+    </ul>
+</section>

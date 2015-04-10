@@ -1,0 +1,27 @@
+<section class="section container-fluid">
+  <style>
+    .center{
+      text-align: center;
+    }
+    #hcmut-logo{
+      width: 40%;
+      margin-bottom: 40px;
+    }
+  </style>
+  <form action="" id="">
+    <fieldset>
+      <div class="center">
+        <img id="hcmut-logo" src="images/Logo-hcmut.svg" />
+      </div>
+      <div title="" ng-init="studentId='51204547'" class="form-group">
+        <label>Mã số sinh viên</label>
+        <input bs-form-control type="text" ng-model="studentId"
+               class="form-control input-lg">
+      </div>
+    </fieldset>
+    <button ngbk-focus ng-click="signin()"
+            class="btn btn-primary btn-block btn-lg">ĐĂNG NHẬP
+    </button>
+  </form>
+
+</section>
