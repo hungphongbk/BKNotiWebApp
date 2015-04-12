@@ -6,9 +6,28 @@ var app=angular.module('BKNotification.controllers.Main');
 app.factory('BKNotiApi',['$http','$q',function($http,$q){
     var DATA=(function(testmode){
         function def(){
+            var _this=this;
+
             this.currentStu='';
             this.currentStuName='';
             this.signInCompletedCallback=[];
+
+            var viewState='login';
+            this.viewStateChangeCallback=null;
+            Object.defineProperty(this,'viewState',{
+                get:function(){return viewState;},
+                set:function(value){
+                    if(viewState!=value){
+                        viewState=value;
+                        if(_this.viewStateChangeCallback!=null)
+                            _this.viewStateChangeCallback();
+                    }
+                }
+            });
+
+            this.schedule={};
+            this.scheduleViewState='all';
+            this.getScheduleCompletedCallback=[];
         }
         def.prototype.setStudentId=function(id){
             var that=this;
@@ -38,20 +57,45 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
         };
 
         def.prototype.getSchedule=function(){
+            var _this=this;
             var url=(testmode)?'test/tkb.json':'http://hungphongbk.ddns.net:3000/bk/list/tkb?stu='+this.currentStu;
             return $q(function(resolve,reject){
                 $http.get(url).success(function(rs){
+                    _this.scheduleViewState='all';
+                    _this.schedule=rs;
+                    var events=_this.getScheduleCompletedCallback;
+                    for(var e in events) if (typeof events[e]==='function'){
+                        events[e](_this);
+                    }
                     resolve(rs);
                 }).error(function(rs,code){
                     reject(rs);
                 });
             });
         };
+        def.prototype.getScheduleByWeek=function(){
+            var _this=this;
+            var url=(testmode)?'test/tkb.json':'http://hungphongbk.ddns.net:3000/bk/list/tkb?stu='+this.currentStu+'&byWeek=1';
+            return $q(function(resolve,reject){
+                $http.get(url).success(function(rs){
+                    _this.scheduleViewState='byWeek';
+                    _this.schedule=rs;
+                    var events=_this.getScheduleCompletedCallback;
+                    for(var e in events) if (typeof events[e]==='function'){
+                        events[e](_this);
+                    }
+                    resolve(rs);
+                }).error(function(rs,code){
+                    reject(rs);
+                });
+            });
+        };
+
         return def;
     })(false);
     var data=new DATA();
 
-    var obj = {
+    /*var obj = {
         Student: {
             set: data.setStudentId,
             get: data.getStudentId,
@@ -66,6 +110,6 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
         for(var i in o)
             if (typeof o[i]==='function') o[i]=o[i].bind(data);
             else binds(o[i]);
-    })(obj);
-    return obj;
+    })(obj);*/
+    return data;
 }]);

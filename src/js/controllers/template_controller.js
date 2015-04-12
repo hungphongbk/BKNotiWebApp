@@ -4,7 +4,18 @@
 var app=angular.module('BKNotification.controllers.Main');
 
 app.controller('TemplateController', ['$scope','BKNotiApi',function($scope,BKNotiApi){
+    $scope.isScheduleViewState=false;
+    BKNotiApi.viewStateChangeCallback=function(){
+        $scope.isScheduleViewState=(BKNotiApi.viewState=='schedule');
+    };
+
     $scope.isSignedIn=function(){
-        return BKNotiApi.Student.isSignedIn();
-    }
+        return BKNotiApi.isSignedIn();
+    };
+    $scope.callApi=function(apiName){
+        console.log(apiName);
+        if(typeof BKNotiApi[apiName]==='function'){
+            BKNotiApi[apiName]();
+        }
+    };
 }]);

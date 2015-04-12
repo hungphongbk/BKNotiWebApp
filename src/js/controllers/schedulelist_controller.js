@@ -1,13 +1,16 @@
 var app=angular.module('BKNotification.controllers.Main');
 
 app.controller('ScheduleListController', ['$scope','BKNotiApi',function($scope,BKNotiApi){
-    $scope.studentInfo=BKNotiApi.Student.get();
+    BKNotiApi.getScheduleCompletedCallback.push(function(target){
+        console.log(target.scheduleViewState);
+        console.log(target.schedule);
+        $scope.schedule=target.schedule;
+    });
+
+    $scope.studentInfo=BKNotiApi.getStudentId();
     $scope.schedule={};
     $scope.init=function () {
-        BKNotiApi.Schedule.get().then(function (rs) {
-            $scope.schedule = rs;
-        }, function (err) {
-            console.log(err);
-        });
+        BKNotiApi.viewState='schedule';
+        BKNotiApi.getSchedule();
     };
 }]);

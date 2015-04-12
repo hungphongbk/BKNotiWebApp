@@ -11,7 +11,7 @@ app.controller('SignInController', ['$scope',
     $scope.signin=function(){
         var id=$scope.studentId;
         if(id){
-            BKNotiApi.Student.set(id).then(function(){
+            BKNotiApi.setStudentId(id).then(function(){
                 $location.path('/tkb');
             },function(err){
                 console.log(err);

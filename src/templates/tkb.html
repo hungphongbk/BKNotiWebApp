@@ -2,8 +2,8 @@
     <div class="scrollable-content">
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="stu in schedule.Items">
-                <h4>{{stu.key.Name}}</h4>
-                <h6><span class="subtitle">Nhóm</span> {{stu.key.Group}}</h6>
+                <h4>{{stu.key.Name || stu.Name}}</h4>
+                <h6><span class="subtitle">Nhóm</span> {{stu.key.Group || stu.Group}}</h6>
             </li>
         </ul>
     </div>
