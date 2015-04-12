@@ -8,6 +8,7 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
         function def(){
             this.currentStu='';
             this.currentStuName='';
+            this.signInCompletedCallback=[];
         }
         def.prototype.setStudentId=function(id){
             var that=this;
@@ -15,6 +16,9 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
                 $http.get('http://hungphongbk.ddns.net:3000/bk/list/name?stu='+id).success(function(rs){
                     that.currentStu=rs.StudentID;
                     that.currentStuName=rs.StudentName;
+                    for(var e in that.signInCompletedCallback)
+                        if(typeof that.signInCompletedCallback[e]==='function')
+                            that.signInCompletedCallback[e].apply(that);
                     resolve();
                 }).error(function(rs,code){
                     reject(rs);
@@ -28,11 +32,12 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
             };
         };
         def.prototype.isSignedIn=function(){
-            return (typeof this.currentStu !== 'undefined');
+            var rs=(typeof this.currentStu != 'undefined');
+            if(rs) rs&=this.currentStu.length>7;
+            return rs;
         };
 
         def.prototype.getSchedule=function(){
-            console.log(this);
             var url=(testmode)?'test/tkb.json':'http://hungphongbk.ddns.net:3000/bk/list/tkb?stu='+this.currentStu;
             return $q(function(resolve,reject){
                 $http.get(url).success(function(rs){
@@ -50,7 +55,8 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
         Student: {
             set: data.setStudentId,
             get: data.getStudentId,
-            isSignedIn: data.isSignedIn
+            isSignedIn: data.isSignedIn,
+            signInCompletedCallback: data.signInCompletedCallback
         },
         Schedule: {
             get: data.getSchedule

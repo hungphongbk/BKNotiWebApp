@@ -1,8 +1,8 @@
 /*THIET LAP CAI DAT MOBILE ANGULAR UI*/
 angular.module('BKNotification', [
-  'ngRoute',
-  'mobile-angular-ui',
-  'BKNotification.controllers.Main'
+    'ngRoute',
+    'mobile-angular-ui',
+    'BKNotification.controllers.Main'
 ])
 
     .config(function($routeProvider) {

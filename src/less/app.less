@@ -1,7 +1,7 @@
 /*BOOTSTRAP*/
-@import "bootstrap/less/mixins.less";
+/*@import "bootstrap/less/mixins.less";
 @import "bootstrap/less/variables.less";
-@import "bootstrap/less/buttons.less";
+@import "bootstrap/less/buttons.less";*/
 
 @import "mobile-angular-ui/src/less/mobile-angular-ui.less";
 @import "mixins.less";
@@ -16,4 +16,19 @@ body{
 .app{
   height: calc(~'100% - 20px');
   margin-top: 20px;
+}
+.sidebar{
+  .list-group-item{
+    background-color: transparent;
+    color: #fff;
+    border-bottom-width: 0;
+    &.active{
+      background-color: @color-theme;
+    }
+  }
+}
+.app-content{
+  span.subtitle{
+    color:@gray-light;
+  }
 }

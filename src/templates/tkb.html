@@ -1,9 +1,10 @@
-<section class="section container-fluid" ng-init="init()">
-    <h1>{{studentInfo.StudentId}}</h1>
-    <h4>{{studentInfo.StudentName}}</h4>
-    <ul>
-        <li ng-repeat="stu in schedule.Items">
-            {{stu.key.Name}}
-        </li>
-    </ul>
-</section>
+<div class="scrollable" ng-init="init()">
+    <div class="scrollable-content">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="stu in schedule.Items">
+                <h4>{{stu.key.Name}}</h4>
+                <h6><span class="subtitle">Nhóm</span> {{stu.key.Group}}</h6>
+            </li>
+        </ul>
+    </div>
+</div>

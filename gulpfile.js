@@ -257,6 +257,11 @@ gulp.task('build', function(done) {
   seq('clean', tasks, done);
 });
 
+gulp.task('build-only-html', function(done){
+    var tasks=['less','js'];
+    seq('html', tasks, done);
+});
+
 
 /*====================================
 =            Default Task            =
