@@ -10,9 +10,16 @@ angular.module('BKNotification', [
             controller: 'SignInController' ,
             templateUrl:'home.html',
             reloadOnSearch: false
-        });
-        $routeProvider.when('/tkb', {
+        }).when('/tkb', {
             templateUrl: 'tkb.html',
+            reloadOnSearch: false,
+            controller: 'ScheduleListController'
+        }).when('/lt', {
+            templateUrl: 'lt.html',
+            reloadOnSearch: false,
+            controller: 'ScheduleListController'
+        }).when('/bd', {
+            templateUrl: 'bd.html',
             reloadOnSearch: false,
             controller: 'ScheduleListController'
         }).otherwise({

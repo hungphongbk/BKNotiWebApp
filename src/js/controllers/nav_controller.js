@@ -16,11 +16,11 @@ app.controller('NavController',['$scope','BKNotiApi',function($scope,BKNotiApi){
         },
         {
             label:'Lịch thi',
-            url:'/tkb'
+            url:'/lt'
         },
         {
             label:'Bảng điểm',
-            url:'/tkb'
+            url:'/bd'
         }
     ];
 }]);

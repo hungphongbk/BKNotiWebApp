@@ -23,9 +23,9 @@
   <body ng-app="BKNotification" ng-controller="TemplateController">
 
     <!-- Sidebars -->
-    <div ng-include="'sidebar.html'" 
+    <div ng-include="'sidebar.html'"
             ui-track-as-search-param='true'
-            class="sidebar sidebar-left"></div>
+            class="sidebar sidebar-left" ng-controller="NavController"></div>
 
     <div class="app">
 
@@ -49,7 +49,7 @@
 
       <div class="navbar navbar-app navbar-absolute-bottom">
         <div class="btn-group justified" ng-show="isScheduleViewState">
-          <a ng-click="callApi('getScheduleByWeek')" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i>Show by week</a>
+          <a ng-click="callApi('toggleScheduleView')" class="btn btn-navbar"><i class="fa fa-calendar-o fa-navbar fa-2x"></i>Show by week</a>
         </div>
       </div>
 

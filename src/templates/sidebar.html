@@ -1,12 +1,15 @@
-<div class="scrollable" ng-controller="NavController">
-  <div class="scrollable-header app-name">
-      <h1>{{studentInfo.StudentId}}</h1>
-      <h4>{{studentInfo.StudentName}}</h4>
+
+<div class="scrollable">
+  <div class="app-name scrollable-header">
+    <h1>{{studentInfo.StudentId}}</h1>
+    <h4>{{studentInfo.StudentName}}</h4>
   </div>
   <div class="scrollable-content">
     <div class="list-group" ui-turn-off='uiSidebarLeft'>
       <a class="list-group-item" ng-repeat="item in menu" href="#{{item.url}}">
-          <h4>{{item.label}}<i class="fa fa-chevron-right pull-right"></i></h4>
+          <i class="fa fa-chevron-right pull-right"></i>
+          <h4 class="list-group-item-heading">{{item.label}}</h4>
+          <p class="list-group-item-text">Lorem ipsum</p>
       </a>
     </div>
   </div>

@@ -18,15 +18,27 @@ body{
   margin-top: 20px;
 }
 .sidebar{
-  .list-group-item{
+  @forecolor: #fff;
+  @s:list-group-item;
+  .@{s},a.@{s}{
     background-color: transparent;
-    color: #fff;
+    color: @forecolor;
+    .@{s}-heading, .@{s}-text{
+      color: @forecolor;
+    }
     border-bottom-width: 0;
-    &.active{
+    &.active {
       background-color: @color-theme;
     }
   }
 }
+/*MODIFY FONT_AWESOME ICONS*/
+.fa{
+  margin-right: 0.25em;
+  vertical-align: middle;
+}
+
+/*APP CONTENT*/
 .app-content{
   span.subtitle{
     color:@gray-light;

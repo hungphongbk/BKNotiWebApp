@@ -90,6 +90,11 @@ app.factory('BKNotiApi',['$http','$q',function($http,$q){
                 });
             });
         };
+        def.prototype.toggleScheduleView=function(){
+            if(this.scheduleViewState==='all')
+                this.getScheduleByWeek();
+            else this.getSchedule();
+        };
 
         return def;
     })(false);
