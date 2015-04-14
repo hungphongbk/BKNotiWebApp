@@ -10,16 +10,15 @@
 .hidden{
   display: none;
 }
-body{
-  background-color: #777;
-}
-.app{
-  height: calc(~'100% - 20px');
-  margin-top: 20px;
-}
 .sidebar{
   @forecolor: #fff;
   @s:list-group-item;
+
+  #student-info{
+    padding: 12px;
+    color: #fff;
+  }
+
   .@{s},a.@{s}{
     background-color: transparent;
     color: @forecolor;

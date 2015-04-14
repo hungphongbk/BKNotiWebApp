@@ -1,8 +1,10 @@
 
 <div class="scrollable">
-  <div class="app-name scrollable-header">
-    <h1>{{studentInfo.StudentId}}</h1>
-    <h4>{{studentInfo.StudentName}}</h4>
+  <div class="media" id="student-info">
+    <div class="media-body">
+        <h1 class="media-heading">{{studentInfo.StudentId}}</h1>
+        {{studentInfo.StudentName}}
+    </div>
   </div>
   <div class="scrollable-content">
     <div class="list-group" ui-turn-off='uiSidebarLeft'>
